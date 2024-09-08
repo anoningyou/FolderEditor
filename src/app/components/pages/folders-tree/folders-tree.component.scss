@@ -1,0 +1,59 @@
+.folders-tree-invisible {
+  display: none;
+}
+
+.folders-tree .mat-nested-tree-node {
+  user-select: none;
+}
+
+.folders-tree .mat-nested-tree-node div[role=group] {
+  padding-left: 40px;
+}
+
+.mat-tree-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.toggle-container {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+}
+
+.node-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+
+  .mat-icon {
+    flex-shrink: 0;
+  }
+
+  .node-name {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+  }
+}
+
+.selected {
+  background-color: #f0f0f0;
+}
+
+.drag-over {
+  outline: 2px dashed #c4c6d0;
+}

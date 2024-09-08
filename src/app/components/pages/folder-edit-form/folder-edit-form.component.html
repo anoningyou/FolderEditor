@@ -1,0 +1,40 @@
+@if(currentNode()){
+<form class="input-form"
+      [formGroup]="editForm"
+      (ngSubmit)="editForm.valid && onSubmit()">
+  <mat-form-field class="input-field">
+    <mat-label>Name</mat-label>
+    <input matInput
+           [type]="'text'"
+           [formControl]="editForm.controls.name"
+           [placeholder]="'Input name'" />
+    @if (editForm.controls.name.invalid){
+    <mat-error class="error">{{getErrorMessage(editForm.controls.name)}}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field class="input-field">
+    <mat-label>Icon</mat-label>
+    <mat-select [formControl]="editForm.controls.icon"
+                [placeholder]="'Choose an icon'">
+      <mat-select-trigger>
+        <mat-icon>{{selectedIcon()}}</mat-icon>
+      </mat-select-trigger>
+      @for (option of options; track option) {
+      <mat-option [value]="option">
+        <mat-icon>{{option}}</mat-icon>
+      </mat-option>
+      }
+    </mat-select>
+    @if (editForm.controls.icon.invalid){
+    <mat-error class="error">{{getErrorMessage(editForm.controls.icon)}}</mat-error>
+    }
+  </mat-form-field>
+  <button class="button"
+          mat-flat-button
+          [disabled]="!editForm.dirty || !editForm.valid"
+          color="accent"
+          type="submit">
+    Save
+  </button>
+</form>
+}

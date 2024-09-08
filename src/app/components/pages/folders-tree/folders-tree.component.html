@@ -1,0 +1,44 @@
+<mat-tree [dataSource]="dataSource"
+          [treeControl]="treeControl"
+          class="folders-tree">
+  <mat-nested-tree-node *matTreeNodeDef="let node;"
+                        [cdkTreeNodeTypeaheadLabel]="node.name">
+    <div class="mat-tree-node"
+         [ngClass]="{
+            'selected': (node | asTreeNode) === currentNode(),
+            'drag-over': (node | asTreeNode).onDragDragOver()
+            }"
+         draggable="true"
+         (dragstart)="handleDragStart($event, node);"
+         (dragover)="handleDragOver($event, node);"
+         (dragleave)="handleDragLeave(node);"
+         (drop)="handleDrop($event, node);"
+         (dragend)="handleDragEnd($event);">
+      <div class="toggle-container">
+        @if (!!((node | asTreeNode)?.children$ | async)?.length) {
+        <button mat-icon-button
+                matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + (node | asTreeNode).name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        }
+      </div>
+      <div class="node-container"
+           (click)="setCurrentNode($event, node)">
+        <mat-icon class="mat-icon">
+          {{(node | asTreeNode).icon()}}
+        </mat-icon>
+        <p class="node-name"
+            [title]="(node | asTreeNode).name()">
+          {{(node | asTreeNode).name()}}
+        </p>
+      </div>
+    </div>
+    <div [class.folders-tree-invisible]="!treeControl.isExpanded(node | asTreeNode)"
+         role="group">
+      <ng-container matTreeNodeOutlet></ng-container>
+    </div>
+  </mat-nested-tree-node>
+</mat-tree>

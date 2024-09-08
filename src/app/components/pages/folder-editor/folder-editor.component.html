@@ -1,0 +1,30 @@
+<div class="container">
+  <mat-card class="block tree-block"
+            appearance="outlined">
+
+    <div class="actions">
+      <button mat-flat-button
+              [disabled]="!isCurrentNodeFolder()"
+              (click)="onAddFolders(50)">
+        <mat-icon>add</mat-icon>
+        50 folders
+      </button>
+      <button mat-flat-button
+              [disabled]="!isCurrentNodeFolder()"
+              (click)="onAddFiles(50)">
+        <mat-icon>add</mat-icon>
+        50 files
+      </button>
+    </div>
+
+    <mat-card-content class="tree">
+      <app-folders-tree (itemSelected)="onItemSelected($event)"></app-folders-tree>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="block edit-form"
+            appearance="outlined">
+    <mat-card-content>
+      <app-folder-edit-form [currentNode]="currentNode()"></app-folder-edit-form>
+    </mat-card-content>
+  </mat-card>
+</div>
